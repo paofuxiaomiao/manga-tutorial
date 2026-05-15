@@ -1,25 +1,19 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch, Router as WouterRouter } from "wouter";
+import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import MangaTutorial from "./pages/MangaTutorial";
 import "./index.css";
 
 
-// BASE_URL is '/manga-tutorial/' on GitHub Pages, '' locally
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
-
 function Router() {
   return (
-    <WouterRouter base={base}>
-      <Switch>
-        <Route path={"/"} component={MangaTutorial} />
-        <Route path={"/404"} component={NotFound} />
-        <Route component={NotFound} />
-      </Switch>
-    </WouterRouter>
+    <Switch>
+      <Route path={"/"} component={MangaTutorial} />
+      <Route component={MangaTutorial} />
+    </Switch>
   );
 }
 
