@@ -8,7 +8,8 @@ import MangaTutorial from "./pages/MangaTutorial";
 import "./index.css";
 
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// BASE_URL is '/manga-tutorial/' on GitHub Pages, '' locally
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
 
 function Router() {
   return (
