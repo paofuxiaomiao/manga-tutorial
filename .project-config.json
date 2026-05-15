@@ -1,0 +1,35 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663337528333/bppFKAV5NRAg3uuLc4cMbM",
+    "access_key_id": "ASIAZV3A2ECZDY2LBOKP",
+    "secret_access_key": "GIO6HzJlgOZMJkhSyKQarhORe9xTcJvaiBIUi76/",
+    "session_token": "IQoJb3JpZ2luX2VjEJH//////////wEaCXVzLWVhc3QtMSJHMEUCIQDJGsBErrs2Ju7SXt6oHed5kmLBlvgmhUIvfWiMGhblgwIgTpOD9su9ODOtRq7q5X5tyvcV9wq9OjDGUSwqrlHQe4Mq9QMIWRAEGgw2NjUzODYwOTg4NjYiDDhh/Xr74Xb/RR+2ayrSA+2C8XTghx0tICjV1JsMDi4zdyuwghn28/FZTogX0k2LsfGmcxk6JVJ0vcABYXbw0ZBS+yGjoS/XmGRSvdwceVa7zg6dxqG8EBIFZlDj969AZMwZekTdYQEZCbgrEEn/L3g3IcjvXMSoEB8z4LbfZe5vvhS5FonvePgf073pqhahQoRjarzirxHImINql/5srDyvLwtcq2sI9vvT4rjKx75VQz3MoLLSmwYswc5yg6FLR6V3nLySgtPKUEv6+Hx6wDVGrgd0n4EvVodnBtNh1kLCCOQSQ8K07oVRraHFzo2e+BIag8jvJcDpSObGhkoh6myRuAB5Yohe71/+UmxPBvfbuTfvfOMVSi6NtNLOwp+6b1HsXrOF3tdUNldydMaOp2lkLeBhGIx9JXX8nyXlqaCAwkSoFnWIdCFUaZnBgHIXI2IwFaImhHSlAtTiVIkyv1FTlKFhxsszzunYELrMz3kPb19p2s8zLeN8Nw6PalKbrzWRv3Yki7fsj/YsD9DD+zpaySJUNDqNb4xy2pEXxwSPX/iRtSGD31DgEG3BjEFrmctbbeZCLFkpQMhT4qgwlkT97cKokPG+aOeIgqVS4rgzbHfOuMmWMZRtwkMSgUjAhZ4w1oWW0AY6nQHY5vIvSg8UmPP7CoqOfzZBAGwWwuvoeVbQw8ecW4G3PUSthUQhpw6YUlYOMcvNMc+Bbs0nrP4gJ5CAWt3+R9+9TQv3rnEkH7heZmsOz3k8MJuoy2zHWgO0CFZjO8362gqkP8LxSUSDxy1ZpWPfYde6mMWOe1SAY0jTn6Xi07QS3KMQMrL5VUTCoimuHk75blwGe4IqWPwYN2QPOlpg",
+    "expiration": "2026-05-14T20:07:50.000Z"
+  },
+  "name": "work-report",
+  "path": "/home/ubuntu/work-report",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "7eZoDrzuJGrqJgbmNUwd67",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "9EyUtnY6bNxCj4UcXytJd3",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Manus",
+    "OWNER_OPEN_ID": "N3WRFiPmGxf4Kn9w2dmQow",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "edcf03b8-0089-417d-a9df-880d2f953212",
+    "VITE_APP_ID": "bppFKAV5NRAg3uuLc4cMbM",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "工作汇报展示",
+    "VITE_FRONTEND_FORGE_API_KEY": "ZGrJAD9MzHDL6vUBguhHzs",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
