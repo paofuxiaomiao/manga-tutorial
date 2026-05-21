@@ -47,6 +47,7 @@ import CourseSwitcher from "@/components/CourseSwitcher";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const ORIGINAL_DOC_URL = "https://resonate.feishu.cn/wiki/Loxfw6XHziYRk0kKzdjcFfp9nhb";
+const SCREENSHOT_BACKDROP_STYLE = { backgroundColor: "#020617" };
 const PROMO_CASE = {
   title: "红军辣椒宣传片案例参考",
   href: "https://www.liblib.tv/canvas/share?shareId=QzwuyXVOQ",
@@ -468,7 +469,15 @@ export default function MangaTutorial() {
   };
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const target = document.getElementById(id);
+    if (target) {
+      const previousBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = "auto";
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+      window.requestAnimationFrame(() => {
+        document.documentElement.style.scrollBehavior = previousBehavior;
+      });
+    }
     setSidebarOpen(false);
   };
 
@@ -685,7 +694,12 @@ function HeroSection({ progress, onStart }: { progress: number; onStart: () => v
               <span className="ml-3 text-xs text-slate-500">LibTV learning map</span>
             </div>
             <div className="p-4">
-              <img src={SOURCE_IMAGES.canvasEntry} alt="LibTV 新建画布入口截图" className="aspect-video w-full rounded-lg object-cover" />
+              <img
+                src={SOURCE_IMAGES.canvasEntry}
+                alt="LibTV 新建画布入口截图"
+                className="aspect-video w-full rounded-lg object-cover"
+                style={SCREENSHOT_BACKDROP_STYLE}
+              />
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {["文本", "图片", "视频", "音频"].map((item) => (
                   <div key={item} className="rounded-lg border border-white/8 bg-white/[0.03] px-3 py-2 text-xs text-slate-400">
@@ -1029,7 +1043,7 @@ function ToolsSection() {
           </div>
           {tool.cover ? (
             <div className="overflow-hidden rounded-lg border border-white/8 bg-[#0b0f19]">
-              <img src={tool.cover} alt={tool.title} className="aspect-video h-full w-full object-cover" />
+              <img src={tool.cover} alt={tool.title} className="aspect-video h-full w-full object-cover" style={SCREENSHOT_BACKDROP_STYLE} />
             </div>
           ) : (
             <div className="grid place-items-center rounded-lg border border-white/8 bg-[#0b0f19] p-8">
@@ -1443,7 +1457,14 @@ function SourceImage({ src, title, caption }: { src: string; title: string; capt
           className="group relative block w-full overflow-hidden text-left"
           aria-label={`放大查看：${title}`}
         >
-          <img src={src} alt={title} loading="lazy" className="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.02]" />
+          <img
+            src={src}
+            alt={title}
+            loading="eager"
+            decoding="async"
+            className="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+            style={SCREENSHOT_BACKDROP_STYLE}
+          />
           <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-black/45 text-white opacity-90 shadow-lg shadow-black/30 backdrop-blur transition group-hover:bg-cyan-300 group-hover:text-slate-950">
             <Maximize2 className="h-4 w-4" />
           </span>
@@ -1489,7 +1510,7 @@ function SourceImage({ src, title, caption }: { src: string; title: string; capt
                 </button>
               </div>
               <div className="flex min-h-0 flex-1 items-center justify-center overflow-auto bg-black/30 p-3 sm:p-5">
-                <img src={src} alt={title} className="max-h-[78vh] w-auto max-w-full rounded-lg object-contain" />
+                <img src={src} alt={title} className="max-h-[78vh] w-auto max-w-full rounded-lg object-contain" style={SCREENSHOT_BACKDROP_STYLE} />
               </div>
             </motion.div>
           </motion.div>

@@ -138,6 +138,10 @@
       linear-gradient(180deg, #ffffff 0%, #f7fbff 48%, #eef7ff 100%);
   }
 
+  .libtv-light [id] {
+    scroll-margin-top: 5rem;
+  }
+
   .libtv-light[class~="bg-[#0b0f19]"],
   .libtv-light [class~="bg-[#0b0f19]"],
   .libtv-light [class~="bg-[#0f1522]"],
