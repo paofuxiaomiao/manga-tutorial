@@ -6,6 +6,7 @@ import {
   Camera,
   CheckCircle2,
   Clapperboard,
+  ExternalLink,
   Film,
   Library,
   MousePointer2,
@@ -47,6 +48,13 @@ const workflow = [
   { icon: Wand2, title: "再用工具", body: "进入 LibTV 画布，把参考图、节点、模型和视频生成串成稳定流程。" },
   { icon: PlayCircle, title: "最后复盘", body: "用清单和测验检查关键动作，形成可以重复使用的个人工作流。" },
 ];
+
+const promoCase = {
+  title: "红军辣椒宣传片案例参考",
+  href: "https://www.liblib.tv/canvas?projectId=98f414b596d8482d9ae0c23bb41cfe78",
+  cover: asset("cases/hongjun-chili-promo.png"),
+  summary: "用于第二课的 LibTV 画布案例参考。点击封面可直接打开项目，查看宣传片画布、素材和生成链路。",
+};
 
 export default function CourseHome() {
   return (
@@ -182,6 +190,36 @@ export default function CourseHome() {
             );
           })}
         </div>
+
+        <motion.a
+          href={promoCase.href}
+          target="_blank"
+          rel="noreferrer"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          className="group mt-8 grid overflow-hidden rounded-lg border border-amber-200/18 bg-white/[0.045] transition hover:-translate-y-1 hover:border-amber-200/35 hover:bg-white/[0.07] lg:grid-cols-[1.05fr_0.95fr]"
+        >
+          <div className="relative min-h-72 overflow-hidden">
+            <img src={promoCase.cover} alt={promoCase.title} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/12 to-[#070b14]/70 lg:bg-gradient-to-r" />
+            <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-md border border-white/12 bg-black/42 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+              <Film className="h-3.5 w-3.5 text-amber-200" />
+              宣传片案例参考
+            </div>
+          </div>
+          <div className="flex flex-col justify-center p-5 sm:p-7">
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-amber-300/12 text-amber-200">
+              <Camera className="h-5 w-5" />
+            </div>
+            <h3 className="font-serif text-2xl font-semibold text-white">{promoCase.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-400">{promoCase.summary}</p>
+            <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-amber-200">
+              打开 LibTV 画布
+              <ExternalLink className="h-4 w-4 transition group-hover:translate-x-1" />
+            </div>
+          </div>
+        </motion.a>
       </section>
 
       <footer className="border-t border-white/8 py-8 text-center text-xs text-slate-600">

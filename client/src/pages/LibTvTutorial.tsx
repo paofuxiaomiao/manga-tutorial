@@ -46,6 +46,12 @@ import CourseSwitcher from "@/components/CourseSwitcher";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const ORIGINAL_DOC_URL = "https://resonate.feishu.cn/wiki/Loxfw6XHziYRk0kKzdjcFfp9nhb";
+const PROMO_CASE = {
+  title: "红军辣椒宣传片案例参考",
+  href: "https://www.liblib.tv/canvas?projectId=98f414b596d8482d9ae0c23bb41cfe78",
+  cover: asset("cases/hongjun-chili-promo.png"),
+  summary: "用作第二课的案例参考。点击封面进入 LibTV 画布，可对照课程里的节点、工作流和素材管理方法观察完整宣传片项目。",
+};
 
 const SOURCE_IMAGES = {
   canvasEntry: asset("libtv/source/canvas-entry.png"),
@@ -68,6 +74,7 @@ const NAV_ITEMS = [
   { id: "overview", label: "课程总览", icon: BookOpen },
   { id: "canvas", label: "无限画布", icon: MousePointer2 },
   { id: "workflow", label: "工作流搭建", icon: SplitSquareHorizontal },
+  { id: "case", label: "案例参考", icon: Camera },
   { id: "tools", label: "实用工具", icon: Wand2 },
   { id: "models", label: "模型清单", icon: Layers },
   { id: "compliance", label: "合规与音色", icon: ShieldCheck },
@@ -419,6 +426,7 @@ export default function MangaTutorial() {
           <OverviewSection />
           <CanvasSection />
           <WorkflowSection />
+          <CaseReferenceSection />
           <ToolsSection />
           <ModelsSection />
           <ComplianceSection />
@@ -843,6 +851,65 @@ function WorkflowSection() {
           </div>
         ))}
       </div>
+    </section>
+  );
+}
+
+function CaseReferenceSection() {
+  return (
+    <section>
+      <SectionHeader id="case" icon={Camera} eyebrow="CASE STUDY" title="宣传片案例参考：红军辣椒项目画布" />
+
+      <div className="grid overflow-hidden rounded-xl border border-amber-200/18 bg-white/[0.03] lg:grid-cols-[1.08fr_0.92fr]">
+        <a
+          href={PROMO_CASE.href}
+          target="_blank"
+          rel="noreferrer"
+          className="group relative block min-h-72 overflow-hidden"
+          aria-label={`打开案例画布：${PROMO_CASE.title}`}
+        >
+          <img src={PROMO_CASE.cover} alt={PROMO_CASE.title} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/62 via-black/5 to-transparent" />
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+            <span className="rounded-md border border-white/12 bg-black/45 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+              点击封面打开 LibTV 画布
+            </span>
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-300 text-slate-950 shadow-lg shadow-black/30">
+              <ExternalLink className="h-4 w-4" />
+            </span>
+          </div>
+        </a>
+
+        <div className="flex flex-col justify-center p-5 sm:p-7">
+          <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-amber-200/20 bg-amber-200/10 px-3 py-1 text-xs font-medium text-amber-100">
+            <Film className="h-3.5 w-3.5" />
+            宣传片案例参考
+          </div>
+          <h3 className="font-serif text-2xl font-semibold text-slate-50">{PROMO_CASE.title}</h3>
+          <p className="mt-4 text-sm leading-7 text-slate-400">{PROMO_CASE.summary}</p>
+          <div className="mt-5 grid gap-2 sm:grid-cols-3">
+            {["封面气氛", "画布链路", "成片参考"].map((item) => (
+              <div key={item} className="rounded-lg border border-white/8 bg-[#0b0f19]/45 px-3 py-2 text-xs text-slate-400">
+                <CheckCircle2 className="mb-1.5 h-3.5 w-3.5 text-emerald-300" />
+                {item}
+              </div>
+            ))}
+          </div>
+          <a
+            href={PROMO_CASE.href}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex w-fit items-center gap-2 rounded-md bg-amber-300 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-200"
+          >
+            打开案例画布
+            <ExternalLink className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+
+      <TipBox type="tip">
+        <p>学习时可以先看封面判断宣传片基调，再进入画布观察素材如何分层、节点如何连接、哪些画面适合作为关键帧或视频参考。</p>
+      </TipBox>
     </section>
   );
 }
