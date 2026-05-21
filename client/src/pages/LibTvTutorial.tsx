@@ -30,6 +30,7 @@ import {
   Maximize2,
   Mic2,
   Monitor,
+  Moon,
   MousePointer2,
   PanelLeft,
   PlayCircle,
@@ -39,6 +40,7 @@ import {
   Sparkles,
   SplitSquareHorizontal,
   Star,
+  Sun,
   Wand2,
   X,
   Zap,
@@ -433,6 +435,13 @@ type ToolTone = "violet" | "cyan" | "rose" | "amber" | "emerald";
 export default function MangaTutorial() {
   const [activeSection, setActiveSection] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isLightOn, setIsLightOn] = useState(() => {
+    try {
+      return localStorage.getItem("libtv-course-theme") !== "dark";
+    } catch {
+      return true;
+    }
+  });
   const [completedTasks, setCompletedTasks] = useState<string[]>(() => {
     try {
       return JSON.parse(localStorage.getItem("libtv-course-progress") || "[]");
@@ -444,6 +453,10 @@ export default function MangaTutorial() {
   useEffect(() => {
     localStorage.setItem("libtv-course-progress", JSON.stringify(completedTasks));
   }, [completedTasks]);
+
+  useEffect(() => {
+    localStorage.setItem("libtv-course-theme", isLightOn ? "light" : "dark");
+  }, [isLightOn]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -482,10 +495,17 @@ export default function MangaTutorial() {
   };
 
   return (
-    <div className="libtv-light min-h-screen bg-[#0b0f19] text-slate-100">
+    <div className={`${isLightOn ? "libtv-light " : ""}min-h-screen bg-[#0b0f19] text-slate-100`}>
       <CourseSwitcher current="libtv" />
 
-      <Header activeSection={activeSection} progress={progress} onNavigate={scrollTo} onMenu={() => setSidebarOpen(true)} />
+      <Header
+        activeSection={activeSection}
+        progress={progress}
+        isLightOn={isLightOn}
+        onToggleLights={() => setIsLightOn((value) => !value)}
+        onNavigate={scrollTo}
+        onMenu={() => setSidebarOpen(true)}
+      />
       <MobileSidebar open={sidebarOpen} activeSection={activeSection} onClose={() => setSidebarOpen(false)} onNavigate={scrollTo} />
 
       <main className="pt-14">
@@ -517,14 +537,20 @@ export default function MangaTutorial() {
 function Header({
   activeSection,
   progress,
+  isLightOn,
+  onToggleLights,
   onNavigate,
   onMenu,
 }: {
   activeSection: string;
   progress: number;
+  isLightOn: boolean;
+  onToggleLights: () => void;
   onNavigate: (id: string) => void;
   onMenu: () => void;
 }) {
+  const LightIcon = isLightOn ? Moon : Sun;
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#0b0f19]/88 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-[1600px] items-center justify-between px-4 sm:px-6">
@@ -555,6 +581,17 @@ function Header({
         </nav>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onToggleLights}
+            aria-pressed={isLightOn}
+            aria-label={isLightOn ? "关灯切换为深色风格" : "开灯切换为明亮风格"}
+            title={isLightOn ? "关灯切换为深色风格" : "开灯切换为明亮风格"}
+            className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-slate-400 transition-colors hover:bg-white/5 hover:text-slate-200"
+          >
+            <LightIcon className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">{isLightOn ? "关灯" : "开灯"}</span>
+          </button>
           <div className="hidden items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-xs text-slate-400 sm:flex">
             <span className="h-1.5 w-20 overflow-hidden rounded-full bg-white/10">
               <span className="block h-full rounded-full bg-cyan-300" style={{ width: `${progress}%` }} />
