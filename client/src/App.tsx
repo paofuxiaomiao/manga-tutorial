@@ -1,19 +1,27 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import CourseHome from "@/pages/CourseHome";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Router as WouterRouter, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import LibTvTutorial from "./pages/LibTvTutorial";
 import MangaTutorial from "./pages/MangaTutorial";
 import "./index.css";
 
 
 function Router() {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
   return (
-    <Switch>
-      <Route path={"/"} component={MangaTutorial} />
-      <Route component={MangaTutorial} />
-    </Switch>
+    <WouterRouter base={base}>
+      <Switch>
+        <Route path="/" component={CourseHome} />
+        <Route path="/manga" component={MangaTutorial} />
+        <Route path="/libtv" component={LibTvTutorial} />
+        <Route component={NotFound} />
+      </Switch>
+    </WouterRouter>
   );
 }
 

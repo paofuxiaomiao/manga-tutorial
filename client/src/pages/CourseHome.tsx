@@ -1,0 +1,192 @@
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  BadgeCheck,
+  BookOpen,
+  Camera,
+  CheckCircle2,
+  Clapperboard,
+  Film,
+  Library,
+  MousePointer2,
+  PlayCircle,
+  Sparkles,
+  Wand2,
+} from "lucide-react";
+import CourseSwitcher from "@/components/CourseSwitcher";
+
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
+const lessons = [
+  {
+    id: "manga",
+    href: `${import.meta.env.BASE_URL}manga`,
+    label: "第一课",
+    title: "AI 漫剧制作完全指南",
+    subtitle: "从剧本拆解、场景设定、真人感生成到复杂镜头调度，建立完整的 AI 漫剧制作基本功。",
+    icon: Clapperboard,
+    accent: "violet",
+    stats: ["7 个核心模块", "平台对比", "镜头与分镜方法"],
+    path: ["制作概述", "场景设定", "真人感生成", "镜头解析", "分镜设计"],
+  },
+  {
+    id: "libtv",
+    href: `${import.meta.env.BASE_URL}libtv`,
+    label: "第二课",
+    title: "LibTV 从无限画布到视频生成",
+    subtitle: "把飞书《LibTV 使用指南》转化为可练习课程，学习节点、工作流、工具、模型和合规要点。",
+    icon: MousePointer2,
+    accent: "cyan",
+    stats: ["5 类基础节点", "工具与模型筛选", "练习清单 + 测验"],
+    path: ["无限画布", "节点理解", "工作流搭建", "工具检索", "模型选择"],
+  },
+];
+
+const workflow = [
+  { icon: BookOpen, title: "先懂故事", body: "从漫剧制作的叙事、镜头和画面结构开始，先把创作语言立起来。" },
+  { icon: Wand2, title: "再用工具", body: "进入 LibTV 画布，把参考图、节点、模型和视频生成串成稳定流程。" },
+  { icon: PlayCircle, title: "最后复盘", body: "用清单和测验检查关键动作，形成可以重复使用的个人工作流。" },
+];
+
+export default function CourseHome() {
+  return (
+    <main className="min-h-screen bg-[#070b14] text-slate-100">
+      <CourseSwitcher current="home" />
+
+      <section className="relative min-h-[92vh] overflow-hidden">
+        <img
+          src={asset("home/course-hub-hero.png")}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,11,20,0.92),rgba(7,11,20,0.62)_45%,rgba(7,11,20,0.18))]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#070b14] to-transparent" />
+
+        <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-between px-4 py-6 sm:px-6 lg:px-8">
+          <header className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-300/15 text-cyan-200 ring-1 ring-cyan-200/20">
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-200/80">AI Creative Course</p>
+                <h1 className="text-sm font-semibold text-slate-200">AI 漫剧课程库</h1>
+              </div>
+            </div>
+            <a
+              href={lessons[1].href}
+              className="hidden rounded-md border border-white/10 bg-white/8 px-3 py-2 text-xs font-medium text-slate-200 backdrop-blur transition hover:bg-white/14 sm:inline-flex"
+            >
+              继续第二课
+            </a>
+          </header>
+
+          <div className="max-w-3xl pb-12 pt-24 sm:pb-16 lg:pt-28">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-200/20 bg-cyan-200/10 px-3 py-1 text-xs font-medium text-cyan-100">
+                <BadgeCheck className="h-3.5 w-3.5" />
+                两节课 · 从创作方法到工具工作流
+              </div>
+              <h2 className="max-w-3xl font-serif text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+                AI 漫剧制作与 LibTV 实战课程
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+                第一课保留原有 AI 漫剧制作教程，第二课接入 LibTV 指南内容。现在从一个首页进入，学习路径更清楚，也方便后续继续追加第三课、第四课。
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={lessons[0].href}
+                  className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100"
+                >
+                  进入第一课
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href={lessons[1].href}
+                  className="inline-flex items-center gap-2 rounded-md border border-white/12 bg-white/8 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/14"
+                >
+                  进入第二课
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
+        <div className="grid gap-4 lg:grid-cols-2">
+          {lessons.map((lesson, index) => {
+            const Icon = lesson.icon;
+            const isCyan = lesson.accent === "cyan";
+
+            return (
+              <motion.a
+                key={lesson.id}
+                href={lesson.href}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className={`group rounded-lg border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${
+                  isCyan ? "border-cyan-200/16 hover:border-cyan-200/35" : "border-violet-200/16 hover:border-violet-200/35"
+                }`}
+              >
+                <div className="mb-5 flex items-start justify-between gap-4">
+                  <div className={`flex h-11 w-11 items-center justify-center rounded-lg ${isCyan ? "bg-cyan-300/12 text-cyan-200" : "bg-violet-300/12 text-violet-200"}`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${isCyan ? "bg-cyan-300/12 text-cyan-200" : "bg-violet-300/12 text-violet-200"}`}>
+                    {lesson.label}
+                  </span>
+                </div>
+                <h3 className="font-serif text-2xl font-semibold text-white">{lesson.title}</h3>
+                <p className="mt-3 min-h-20 text-sm leading-7 text-slate-400">{lesson.subtitle}</p>
+                <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                  {lesson.stats.map((stat) => (
+                    <div key={stat} className="rounded-md border border-white/8 bg-black/20 px-3 py-2 text-xs text-slate-300">
+                      {stat}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {lesson.path.map((item) => (
+                    <span key={item} className="inline-flex items-center gap-1 rounded-md bg-white/6 px-2.5 py-1 text-xs text-slate-400">
+                      <CheckCircle2 className="h-3 w-3 text-emerald-300" />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <div className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold ${isCyan ? "text-cyan-200" : "text-violet-200"}`}>
+                  开始学习
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </div>
+              </motion.a>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          {workflow.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div key={item.title} className="rounded-lg border border-white/8 bg-white/[0.035] p-5">
+                <Icon className="mb-4 h-5 w-5 text-amber-200" />
+                <h3 className="text-sm font-semibold text-slate-100">{item.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-slate-500">{item.body}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <footer className="border-t border-white/8 py-8 text-center text-xs text-slate-600">
+        AI 漫剧课程库 · 第一课与第二课已整理为独立入口
+      </footer>
+    </main>
+  );
+}
