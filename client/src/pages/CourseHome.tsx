@@ -51,7 +51,7 @@ const workflow = [
 
 const promoCase = {
   title: "红军辣椒宣传片案例参考",
-  href: "https://www.liblib.tv/canvas?projectId=98f414b596d8482d9ae0c23bb41cfe78",
+  href: "https://www.liblib.tv/canvas/share?shareId=QzwuyXVOQ",
   cover: asset("cases/hongjun-chili-promo.png"),
   summary: "用于第二课的 LibTV 画布案例参考。点击封面可直接打开项目，查看宣传片画布、素材和生成链路。",
 };

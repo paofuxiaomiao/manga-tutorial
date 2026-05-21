@@ -48,7 +48,7 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const ORIGINAL_DOC_URL = "https://resonate.feishu.cn/wiki/Loxfw6XHziYRk0kKzdjcFfp9nhb";
 const PROMO_CASE = {
   title: "红军辣椒宣传片案例参考",
-  href: "https://www.liblib.tv/canvas?projectId=98f414b596d8482d9ae0c23bb41cfe78",
+  href: "https://www.liblib.tv/canvas/share?shareId=QzwuyXVOQ",
   cover: asset("cases/hongjun-chili-promo.png"),
   summary: "用作第二课的案例参考。点击封面进入 LibTV 画布，可对照课程里的节点、工作流和素材管理方法观察完整宣传片项目。",
 };
