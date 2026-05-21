@@ -39,6 +39,7 @@ import {
   SplitSquareHorizontal,
   Star,
   Wand2,
+  X,
   Zap,
 } from "lucide-react";
 import CourseSwitcher from "@/components/CourseSwitcher";
@@ -1202,14 +1203,87 @@ function SectionHeader({ id, icon: Icon, eyebrow, title }: { id: string; icon: t
 }
 
 function SourceImage({ src, title, caption }: { src: string; title: string; caption: string }) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
   return (
-    <figure className="overflow-hidden rounded-xl border border-white/8 bg-white/[0.03]">
-      <img src={src} alt={title} loading="lazy" className="aspect-video w-full object-cover" />
-      <figcaption className="border-t border-white/8 p-3">
-        <div className="text-sm font-semibold text-slate-100">{title}</div>
-        <p className="mt-1 text-xs leading-5 text-slate-500">{caption}</p>
-      </figcaption>
-    </figure>
+    <>
+      <figure className="overflow-hidden rounded-xl border border-white/8 bg-white/[0.03]">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="group relative block w-full overflow-hidden text-left"
+          aria-label={`放大查看：${title}`}
+        >
+          <img src={src} alt={title} loading="lazy" className="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.02]" />
+          <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-black/45 text-white opacity-90 shadow-lg shadow-black/30 backdrop-blur transition group-hover:bg-cyan-300 group-hover:text-slate-950">
+            <Maximize2 className="h-4 w-4" />
+          </span>
+        </button>
+        <figcaption className="border-t border-white/8 p-3">
+          <div className="text-sm font-semibold text-slate-100">{title}</div>
+          <p className="mt-1 text-xs leading-5 text-slate-500">{caption}</p>
+        </figcaption>
+      </figure>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/82 p-3 backdrop-blur-md sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
+            onClick={() => setOpen(false)}
+          >
+            <motion.div
+              className="flex max-h-[92vh] w-full max-w-6xl flex-col overflow-hidden rounded-xl border border-white/12 bg-[#0b0f19] shadow-2xl shadow-black/50"
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.22 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-4 border-b border-white/8 px-4 py-3">
+                <div>
+                  <h3 className="text-sm font-semibold text-slate-100 sm:text-base">{title}</h3>
+                  <p className="mt-1 text-xs leading-5 text-slate-500">{caption}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
+                  aria-label="关闭大图"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+              <div className="flex min-h-0 flex-1 items-center justify-center overflow-auto bg-black/30 p-3 sm:p-5">
+                <img src={src} alt={title} className="max-h-[78vh] w-auto max-w-full rounded-lg object-contain" />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
