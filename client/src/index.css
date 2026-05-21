@@ -129,6 +129,93 @@
       max-width: 1280px;
     }
   }
+
+  .libtv-light {
+    color-scheme: light;
+    background:
+      radial-gradient(circle at 16% 6%, rgba(34, 211, 238, 0.14), transparent 26%),
+      radial-gradient(circle at 88% 14%, rgba(16, 185, 129, 0.12), transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, #f7fbff 48%, #eef7ff 100%);
+  }
+
+  .libtv-light[class~="bg-[#0b0f19]"],
+  .libtv-light [class~="bg-[#0b0f19]"],
+  .libtv-light [class~="bg-[#0f1522]"],
+  .libtv-light [class~="bg-[#101826]"],
+  .libtv-light [class~="bg-[#111827]"],
+  .libtv-light [class~="bg-[#0b0f19]/45"],
+  .libtv-light [class~="bg-[#0b0f19]/50"],
+  .libtv-light [class~="bg-[#0b0f19]/60"],
+  .libtv-light [class~="bg-[#0b0f19]/88"],
+  .libtv-light [class~="bg-white/[0.02]"],
+  .libtv-light [class~="bg-white/[0.03]"],
+  .libtv-light [class~="bg-white/[0.035]"],
+  .libtv-light [class~="bg-white/[0.045]"],
+  .libtv-light [class~="bg-white/[0.05]"] {
+    background-color: rgba(255, 255, 255, 0.82) !important;
+  }
+
+  .libtv-light header,
+  .libtv-light [class~="bg-[#0b0f19]/88"] {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  .libtv-light [class~="border-white/5"],
+  .libtv-light [class~="border-white/8"],
+  .libtv-light [class~="border-white/10"],
+  .libtv-light [class~="border-white/12"],
+  .libtv-light [class~="border-white/15"] {
+    border-color: rgba(15, 23, 42, 0.1) !important;
+  }
+
+  .libtv-light[class~="text-slate-100"],
+  .libtv-light [class~="text-slate-50"],
+  .libtv-light [class~="text-slate-100"],
+  .libtv-light [class~="text-slate-200"] {
+    color: #0f172a !important;
+  }
+
+  .libtv-light [class~="text-slate-300"],
+  .libtv-light [class~="text-slate-400"] {
+    color: #334155 !important;
+  }
+
+  .libtv-light [class~="text-slate-500"],
+  .libtv-light [class~="text-slate-600"] {
+    color: #64748b !important;
+  }
+
+  .libtv-light [class~="text-cyan-100"],
+  .libtv-light [class~="text-cyan-200"],
+  .libtv-light [class~="text-cyan-300"],
+  .libtv-light [class~="text-cyan-400"] {
+    color: #0e7490 !important;
+  }
+
+  .libtv-light [class~="text-emerald-200"],
+  .libtv-light [class~="text-emerald-300"] {
+    color: #047857 !important;
+  }
+
+  .libtv-light [class~="text-amber-200"],
+  .libtv-light [class~="text-amber-300"] {
+    color: #b45309 !important;
+  }
+
+  .libtv-light [class~="text-rose-200"],
+  .libtv-light [class~="text-rose-300"] {
+    color: #be123c !important;
+  }
+
+  .libtv-light [class~="text-violet-300"] {
+    color: #6d28d9 !important;
+  }
+
+  .libtv-light [class~="hover:bg-white/5"]:hover,
+  .libtv-light [class~="hover:bg-white/[0.05]"]:hover,
+  .libtv-light [class~="hover:bg-white/10"]:hover {
+    background-color: rgba(14, 165, 233, 0.08) !important;
+  }
 }
 
 /* Custom scrollbar */

@@ -23,6 +23,7 @@ import {
   Film,
   Grid3X3,
   Image,
+  Keyboard,
   Layers,
   Lightbulb,
   ListChecks,
@@ -79,7 +80,65 @@ const NAV_ITEMS = [
   { id: "models", label: "模型清单", icon: Layers },
   { id: "compliance", label: "合规与音色", icon: ShieldCheck },
   { id: "practice", label: "练习与测验", icon: ClipboardCheck },
+  { id: "shortcuts", label: "快捷键", icon: Keyboard },
   { id: "source", label: "原文配图", icon: ExternalLink },
+];
+
+const SHORTCUT_GROUPS: Array<{
+  title: string;
+  icon: typeof BookOpen;
+  tone: ToolTone;
+  items: Array<{ action: string; keys: string[]; after?: string }>;
+}> = [
+  {
+    title: "创作",
+    icon: Sparkles,
+    tone: "cyan",
+    items: [
+      { action: "成组", keys: ["⌘", "G"] },
+      { action: "合并分镜组", keys: ["⌘", "⌥", "G"] },
+      { action: "解组", keys: ["⌘", "⇧", "G"] },
+      { action: "连线", keys: ["⌘", "L"] },
+      { action: "复制整组", keys: ["⌘", "⇧", "C"] },
+      { action: "生成", keys: ["⌘", "Enter"] },
+      { action: "新建节点", keys: ["Tab"] },
+      { action: "节点复制", keys: ["Option"], after: "+ 拖动节点" },
+      { action: "创建副本", keys: ["⌘", "Option"], after: "+ 拖动" },
+    ],
+  },
+  {
+    title: "缩放",
+    icon: Maximize2,
+    tone: "emerald",
+    items: [
+      { action: "放大", keys: ["⌘", "+"] },
+      { action: "缩小", keys: ["⌘", "-"] },
+      { action: "适应画布", keys: ["⌘", "0"] },
+      { action: "触控板缩放", keys: ["双指捏合"] },
+      { action: "鼠标缩放", keys: ["⌘"], after: "+ 鼠标滚轮" },
+    ],
+  },
+  {
+    title: "移动画布",
+    icon: MousePointer2,
+    tone: "violet",
+    items: [
+      { action: "键盘移动", keys: ["Space"], after: "+ 拖动画布" },
+      { action: "触控板移动", keys: ["双指拖动"] },
+      { action: "鼠标移动", keys: ["鼠标滚轮"] },
+      { action: "整理画布", keys: ["⌥", "⇧", "F"] },
+    ],
+  },
+  {
+    title: "其他",
+    icon: RotateCcw,
+    tone: "amber",
+    items: [
+      { action: "撤销", keys: ["⌘", "Z"] },
+      { action: "重做", keys: ["⌘", "⇧", "Z"] },
+      { action: "删除", keys: ["Delete"] },
+    ],
+  },
 ];
 
 const COURSE_MODULES = [
@@ -414,7 +473,7 @@ export default function MangaTutorial() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-slate-100">
+    <div className="libtv-light min-h-screen bg-[#0b0f19] text-slate-100">
       <CourseSwitcher current="libtv" />
 
       <Header activeSection={activeSection} progress={progress} onNavigate={scrollTo} onMenu={() => setSidebarOpen(true)} />
@@ -431,6 +490,7 @@ export default function MangaTutorial() {
           <ModelsSection />
           <ComplianceSection />
           <PracticeSection completedTasks={completedTasks} onToggleTask={toggleTask} />
+          <ShortcutSection />
           <SourceGallerySection />
         </div>
       </main>
@@ -599,7 +659,7 @@ function HeroSection({ progress, onStart }: { progress: number; onStart: () => v
 
           <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
             {[
-              ["7", "课程章节"],
+              ["8", "课程章节"],
               ["5", "基础节点"],
               [`${progress}%`, "练习进度"],
             ].map(([value, label]) => (
@@ -1218,6 +1278,91 @@ function PracticeSection({
         </div>
       </div>
     </section>
+  );
+}
+
+function ShortcutSection() {
+  return (
+    <section>
+      <SectionHeader id="shortcuts" icon={Keyboard} eyebrow="MODULE 08" title="快捷键速查：让画布操作更顺手" />
+
+      <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
+        <div className="rounded-xl border border-cyan-300/20 bg-cyan-300/8 p-5">
+          <div className="mb-4 flex items-center gap-3">
+            <Keyboard className="h-5 w-5 text-cyan-300" />
+            <h3 className="text-lg font-semibold text-slate-100">先记这 5 个高频动作</h3>
+          </div>
+          <div className="space-y-3">
+            {[
+              ["新建节点", "Tab", "想快速铺开画布时，先用它建立新的素材或提示词节点。"],
+              ["生成", "⌘ + Enter", "提示词、参数和参考图确认后，直接提交生成。"],
+              ["成组", "⌘ + G", "把同一段工作流收成一组，方便移动、复用和讲解。"],
+              ["连线", "⌘ + L", "用于把文本、图片、视频节点串成一条生产链路。"],
+              ["适应画布", "⌘ + 0", "画布变乱或缩放过深时，一键回到全局视角。"],
+            ].map(([title, key, desc]) => (
+              <div key={title} className="rounded-lg border border-white/8 bg-white/[0.45] p-3">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-sm font-semibold text-slate-100">{title}</span>
+                  <span className="rounded-md border border-white/12 bg-white/[0.7] px-2 py-1 font-mono text-xs font-semibold text-cyan-300">{key}</span>
+                </div>
+                <p className="mt-2 text-xs leading-5 text-slate-500">{desc}</p>
+              </div>
+            ))}
+          </div>
+          <TipBox type="key">
+            <p>学生练习时不要一次记完整张表。先让他们用 Tab 新建节点、⌘+L 连线、⌘+Enter 生成，再逐步加入成组、复制和整理画布。</p>
+          </TipBox>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {SHORTCUT_GROUPS.map((group) => (
+            <ShortcutCard key={group.title} group={group} />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <SourceImage src={SOURCE_IMAGES.shortcutEntry} title="原文快捷键入口" caption="点击可放大查看飞书原文中的快捷键章节入口，完整操作以原链接说明为准。" />
+      </div>
+    </section>
+  );
+}
+
+function ShortcutCard({ group }: { group: (typeof SHORTCUT_GROUPS)[number] }) {
+  const Icon = group.icon;
+  const tone = colorClasses[group.tone];
+
+  return (
+    <article className={`rounded-xl border p-4 ${tone.panel}`}>
+      <div className="mb-4 flex items-center gap-2">
+        <Icon className={`h-4 w-4 ${tone.icon}`} />
+        <h3 className="text-base font-semibold text-slate-100">{group.title}</h3>
+      </div>
+      <div className="space-y-2.5">
+        {group.items.map((item) => (
+          <div key={item.action} className="flex items-center justify-between gap-3 rounded-lg border border-white/8 bg-white/[0.5] px-3 py-2.5">
+            <span className="text-sm leading-5 text-slate-400">{item.action}</span>
+            <div className="flex shrink-0 flex-wrap items-center justify-end gap-1.5">
+              {item.keys.map((key, index) => (
+                <span key={`${item.action}-${key}-${index}`} className="contents">
+                  {index > 0 && <span className="text-xs text-slate-500">+</span>}
+                  <ShortcutKey>{key}</ShortcutKey>
+                </span>
+              ))}
+              {item.after && <span className="ml-0.5 text-xs font-medium text-slate-500">{item.after}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function ShortcutKey({ children }: { children: ReactNode }) {
+  return (
+    <kbd className="min-w-8 rounded-md border border-white/12 bg-white/[0.75] px-2 py-1 text-center font-mono text-xs font-semibold leading-none text-slate-100 shadow-sm">
+      {children}
+    </kbd>
   );
 }
 
