@@ -1,6 +1,6 @@
-import { Home, Library, Sparkles } from "lucide-react";
+import { Home, Images, Library, Sparkles } from "lucide-react";
 
-type CourseKey = "home" | "manga" | "libtv";
+type CourseKey = "home" | "manga" | "libtv" | "image2";
 
 const base = import.meta.env.BASE_URL;
 
@@ -8,6 +8,7 @@ const links: Array<{ key: CourseKey; label: string; href: string; icon: typeof H
   { key: "home", label: "主页", href: base, icon: Home },
   { key: "manga", label: "第一课", href: `${base}manga`, icon: Library },
   { key: "libtv", label: "第二课", href: `${base}libtv`, icon: Sparkles },
+  { key: "image2", label: "第三课", href: `${base}image2`, icon: Images },
 ];
 
 export default function CourseSwitcher({ current }: { current: CourseKey }) {

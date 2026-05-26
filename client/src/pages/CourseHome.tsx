@@ -8,6 +8,7 @@ import {
   Clapperboard,
   ExternalLink,
   Film,
+  Images,
   Library,
   MousePointer2,
   PlayCircle,
@@ -41,13 +42,45 @@ const lessons = [
     stats: ["5 类基础节点", "工具与模型筛选", "练习清单 + 测验"],
     path: ["无限画布", "节点理解", "工作流搭建", "工具检索", "模型选择"],
   },
+  {
+    id: "image2",
+    href: `${import.meta.env.BASE_URL}image2`,
+    label: "第三课",
+    title: "GPT Image 2 图像迁移魔法课",
+    subtitle: "把风格参考、粗糙机位和跨风格融图整理成可练习流程，学会提示、判断风险和清洗纹理。",
+    icon: Images,
+    accent: "coral",
+    stats: ["3 种迁移玩法", "Prompt Builder", "风险雷达"],
+    path: ["看案例", "拆方法", "改提示词", "做练习", "去纹理"],
+  },
 ];
 
 const workflow = [
   { icon: BookOpen, title: "先懂故事", body: "从漫剧制作的叙事、镜头和画面结构开始，先把创作语言立起来。" },
   { icon: Wand2, title: "再用工具", body: "进入 LibTV 画布，把参考图、节点、模型和视频生成串成稳定流程。" },
-  { icon: PlayCircle, title: "最后复盘", body: "用清单和测验检查关键动作，形成可以重复使用的个人工作流。" },
+  { icon: PlayCircle, title: "最后做迁移", body: "用 GPT Image 2 练风格、机位和融图，同时学会排查一致性、画质和纹理问题。" },
 ];
+
+const lessonAccentStyles = {
+  violet: {
+    border: "border-violet-200/16 hover:border-violet-200/35",
+    icon: "bg-violet-300/12 text-violet-200",
+    badge: "bg-violet-300/12 text-violet-200",
+    action: "text-violet-200",
+  },
+  cyan: {
+    border: "border-cyan-200/16 hover:border-cyan-200/35",
+    icon: "bg-cyan-300/12 text-cyan-200",
+    badge: "bg-cyan-300/12 text-cyan-200",
+    action: "text-cyan-200",
+  },
+  coral: {
+    border: "border-rose-200/16 hover:border-rose-200/35",
+    icon: "bg-rose-300/12 text-rose-200",
+    badge: "bg-rose-300/12 text-rose-200",
+    action: "text-rose-200",
+  },
+};
 
 const promoCase = {
   title: "红军辣椒宣传片案例参考",
@@ -82,10 +115,10 @@ export default function CourseHome() {
               </div>
             </div>
             <a
-              href={lessons[1].href}
+              href={lessons[2].href}
               className="hidden rounded-md border border-white/10 bg-white/8 px-3 py-2 text-xs font-medium text-slate-200 backdrop-blur transition hover:bg-white/14 sm:inline-flex"
             >
-              继续第二课
+              继续第三课
             </a>
           </header>
 
@@ -97,13 +130,13 @@ export default function CourseHome() {
             >
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-200/20 bg-cyan-200/10 px-3 py-1 text-xs font-medium text-cyan-100">
                 <BadgeCheck className="h-3.5 w-3.5" />
-                两节课 · 从创作方法到工具工作流
+                三节课 · 从创作方法到工具工作流再到图像迁移
               </div>
               <h2 className="max-w-3xl font-serif text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                AI 漫剧制作与 LibTV 实战课程
+                AI 漫剧制作、LibTV 与 Image 2 实战课程
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-                第一课保留原有 AI 漫剧制作教程，第二课接入 LibTV 指南内容。现在从一个首页进入，学习路径更清楚，也方便后续继续追加第三课、第四课。
+                第一课建立 AI 漫剧制作基本功，第二课进入 LibTV 画布工作流，第三课把 GPT Image 2 的风格迁移、机位迁移和跨风格融图整理成可练习方法。
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -120,6 +153,13 @@ export default function CourseHome() {
                   进入第二课
                   <ArrowRight className="h-4 w-4" />
                 </a>
+                <a
+                  href={lessons[2].href}
+                  className="inline-flex items-center gap-2 rounded-md border border-rose-200/20 bg-rose-300/12 px-4 py-2.5 text-sm font-semibold text-rose-100 backdrop-blur transition hover:bg-rose-300/18"
+                >
+                  进入第三课
+                  <ArrowRight className="h-4 w-4" />
+                </a>
               </div>
             </motion.div>
           </div>
@@ -127,10 +167,10 @@ export default function CourseHome() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-3">
           {lessons.map((lesson, index) => {
             const Icon = lesson.icon;
-            const isCyan = lesson.accent === "cyan";
+            const accent = lessonAccentStyles[lesson.accent as keyof typeof lessonAccentStyles];
 
             return (
               <motion.a
@@ -140,15 +180,13 @@ export default function CourseHome() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className={`group rounded-lg border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${
-                  isCyan ? "border-cyan-200/16 hover:border-cyan-200/35" : "border-violet-200/16 hover:border-violet-200/35"
-                }`}
+                className={`group rounded-lg border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${accent.border}`}
               >
                 <div className="mb-5 flex items-start justify-between gap-4">
-                  <div className={`flex h-11 w-11 items-center justify-center rounded-lg ${isCyan ? "bg-cyan-300/12 text-cyan-200" : "bg-violet-300/12 text-violet-200"}`}>
+                  <div className={`flex h-11 w-11 items-center justify-center rounded-lg ${accent.icon}`}>
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${isCyan ? "bg-cyan-300/12 text-cyan-200" : "bg-violet-300/12 text-violet-200"}`}>
+                  <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${accent.badge}`}>
                     {lesson.label}
                   </span>
                 </div>
@@ -169,7 +207,7 @@ export default function CourseHome() {
                     </span>
                   ))}
                 </div>
-                <div className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold ${isCyan ? "text-cyan-200" : "text-violet-200"}`}>
+                <div className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold ${accent.action}`}>
                   开始学习
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                 </div>
@@ -223,7 +261,7 @@ export default function CourseHome() {
       </section>
 
       <footer className="border-t border-white/8 py-8 text-center text-xs text-slate-600">
-        AI 漫剧课程库 · 第一课与第二课已整理为独立入口
+        AI 漫剧课程库 · 三节课已整理为独立入口
       </footer>
     </main>
   );

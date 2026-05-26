@@ -5,6 +5,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Router as WouterRouter, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import GptImage2Tutorial from "./pages/GptImage2Tutorial";
 import LibTvTutorial from "./pages/LibTvTutorial";
 import MangaTutorial from "./pages/MangaTutorial";
 import "./index.css";
@@ -19,6 +20,7 @@ function Router() {
         <Route path="/" component={CourseHome} />
         <Route path="/manga" component={MangaTutorial} />
         <Route path="/libtv" component={LibTvTutorial} />
+        <Route path="/image2" component={GptImage2Tutorial} />
         <Route component={NotFound} />
       </Switch>
     </WouterRouter>
