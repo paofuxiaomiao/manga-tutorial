@@ -5,6 +5,7 @@ import {
   BadgeCheck,
   BookOpen,
   Camera,
+  ChevronLeft,
   CheckCircle2,
   ChevronRight,
   ClipboardCheck,
@@ -60,7 +61,7 @@ const toneStyles: Record<Tone, { border: string; soft: string; text: string; bg:
 
 const navItems = [
   { id: "observe", label: "看案例", icon: Eye },
-  { id: "archive", label: "读原文", icon: FileImage },
+  { id: "archive", label: "读原图", icon: FileImage },
   { id: "methods", label: "拆方法", icon: ClipboardCheck },
   { id: "builder", label: "改提示词", icon: SlidersHorizontal },
   { id: "practice", label: "做练习", icon: CheckCircle2 },
@@ -197,8 +198,20 @@ const radarRows = [
 
 const originalArchive = [
   {
+    title: "课程封面",
+    tag: "P1",
+    image: asset("image2/originals/p01.png"),
+    subtitle: "AI 迁移大法：风格、机位、融图",
+    original:
+      "封面用一张高吸引力的角色融图把课程主题先立住：这不是单纯生成图片，而是围绕“风格迁移、机位迁移、跨风格融图”三件事训练学生读图、写提示词和判断模型边界。",
+    prompt:
+      "课堂开场不急着讲技术，先让学生观察封面：角色风格、镜头角度、材质纹理、文字信息分别在告诉我们什么？然后引出本节课的三个关键词：风格、机位、融图。",
+    note: "课堂重点：封面不是案例结论，而是学习目标页。它负责把学生从“好看”带到“我要学会拆解好看的来源”。",
+  },
+  {
     title: "风格参考迁移（1）",
     tag: "P2",
+    image: asset("image2/originals/p02.png"),
     subtitle: "多图风格参考：Alberto Mielgo 人物美术风格（白底设定图）",
     original:
       "原 5 张参考图作为同一作者的风格样本。截图里对比 GPT Image 2 与 Nano Banana Pro：GPT Image 2 更像是在理解参考图的线条、五官比例、色块边缘和人物设定图气质；香蕉更容易变成常见赛博 / 朋克插画风。",
@@ -209,6 +222,7 @@ const originalArchive = [
   {
     title: "风格参考迁移（2）",
     tag: "P3",
+    image: asset("image2/originals/p03.png"),
     subtitle: "《怪化猫》的浮世绘二维场景风格",
     original:
       "原 6 张参考图来自《怪化猫》场景：高饱和配色、装饰性线条、纸面纹理、烟雾形曲线、平面化空间、强图案感。截图里要求生成自由女神雕像中景和摩洛哥街道场景，且场景中没有人物。",
@@ -219,6 +233,7 @@ const originalArchive = [
   {
     title: "风格参考迁移（3）",
     tag: "P4",
+    image: asset("image2/originals/p04.png"),
     subtitle: "材质迁移：参考风格 + 形象设计图",
     original:
       "截图例子使用《荒野机器人》一类带有手绘笔触的风格化 3D 作为前 6 张参考图，再把第 7 张灰白色小狐狸形象设定图转成同类美术风格。结果强调：角色虽然是 3D，但要有明显绘画笔触感。",
@@ -229,6 +244,7 @@ const originalArchive = [
   {
     title: "风格参考迁移（4）",
     tag: "P5",
+    image: asset("image2/originals/p05.png"),
     subtitle: "《以窗为马》的角色 + 场景混合风格模仿",
     original:
       "原 3 张参考图提供同一作者的美术风格，包含人物造型、上色特点、配色方法和场景气质。截图里的目标是生成一个年老日本女性和年轻英国男警官，场景是飞机场大厅。",
@@ -239,6 +255,7 @@ const originalArchive = [
   {
     title: "机位参考迁移（1）",
     tag: "P6",
+    image: asset("image2/originals/p06.png"),
     subtitle: "空场景：用粗糙场景 3D 模型作为参考",
     original:
       "测试方式：将场景图放入 Tripo / Meshy 等图像转 3D 模型，生成粗糙模型后在平台内部调整到需要的角度，然后截图作为机位参考。示例是沙漠工业废墟：左边是粗糙模型俯视角，右边是原始水平视角场景图，要求调整为一致机位。",
@@ -249,6 +266,7 @@ const originalArchive = [
   {
     title: "机位参考迁移（2-3）",
     tag: "P7",
+    image: asset("image2/originals/p07.png"),
     subtitle: "更多空场景：桥梁与魔法教室",
     original:
       "截图用两组例子继续测试空场景改机位。桥梁例子是灰模桥 + 悬崖桥原图，GPT Image 2 试图按灰模角度重构桥体；魔法教室例子是灰模室内长桌 + 原场景，GPT Image 2 尝试重构桌子、窗户、货架和透视。",
@@ -259,6 +277,7 @@ const originalArchive = [
   {
     title: "机位参考迁移（2）",
     tag: "P8",
+    image: asset("image2/originals/p08.png"),
     subtitle: "带多角色粗糙模型：融图 + 改变机位",
     original:
       "例 1 是 2 个角色 + 改变机位。粗模里粉色人物代表白发女孩，蓝色熊猫代表熊猫；场景是沙漠荒漠篝火正面全景图。粗模里的白色立方体代表篝火堆左侧石头，并作为前景遮挡女孩脚部；远景中右侧桥梁在新图里要变到中间偏左，两侧是山脉。",
@@ -268,17 +287,30 @@ const originalArchive = [
   },
   {
     title: "机位参考迁移（3）",
-    tag: "P9-P10",
-    subtitle: "3 个角色 + 改变机位，以及分镜转粗糙模型",
+    tag: "P9",
+    image: asset("image2/originals/p09.png"),
+    subtitle: "3 个角色 + 改变机位",
     original:
-      "例 3 是 3 个角色 + 改变机位。原备注说：场景角度、透视关系、人物站位及比例确实有偏差，但相较其他模型已经最接近正确；角色 / 元素越多，错误概率越高，各类细节一致性越差。另一张分镜测试强调：最好不带模型贴图，否则第二步污染严重、细节错误较多。",
+      "例 3 是 3 个角色 + 改变机位。原备注说：场景角度、透视关系、人物站位及比例确实有偏差，但相较其他模型已经最接近正确；角色 / 元素越多，错误概率越高，各类细节一致性越差。",
     prompt:
-      "先把原始分镜图直接转为粗糙模型，改角度截图；再让 GPT2 利用新机位粗糙模型重构场景；最后可用 Banana 修复细节。粗糙模型只给机位，不要把模型贴图作为最终材质参考。",
+      "按照粗糙模型的构图、透视、遮挡、拍摄角度和比例关系重建场景。逐项说明每个角色和场景元素的对应关系，尤其是角色站位、远景高塔、沙丘、主体前后关系。",
     note: "课堂重点：让学生区分“机位准”和“元素准”。机位可能进步明显，但多角色一致性仍然是风险。",
+  },
+  {
+    title: "机位参考迁移（4）",
+    tag: "P10",
+    image: asset("image2/originals/p10.png"),
+    subtitle: "分镜转粗糙模型，再用新机位重构场景",
+    original:
+      "这页展示从原始分镜图出发：先把分镜直接转为粗糙模型，改角度截图；再让 GPT2 利用新机位粗糙模型重构场景；最后可用 Banana 修复细节。备注强调：最好不带模型贴图，否则第二步污染严重，细节错误较多。",
+    prompt:
+      "原始分镜图只提供故事关系；粗糙模型只提供新机位、遮挡和比例；最终图需要保留原分镜的角色关系和场景意图，但不要继承粗糙模型的贴图、灰模质感和低清纹理。",
+    note: "课堂重点：这是完整工作流页。学生要学会拆成三步：分镜转空间、空间改机位、生成图再清洗。",
   },
   {
     title: "跨风格融图（1）",
     tag: "P11",
+    image: asset("image2/originals/p11.png"),
     subtitle: "Painterly 3D 角色 + 类皮克斯 3D 场景",
     original:
       "截图标题：不同画风的角色与场景融图，并保持各自的风格独立。例 1 是 Painterly 3D 角色 + 类皮克斯 3D 场景。原备注写到：香蕉已经完全把角色改成了更接近场景风格的皮克斯 3D 毛绒，而 GPT 仍然较好保持了角色原本风格。",
@@ -289,6 +321,7 @@ const originalArchive = [
   {
     title: "跨风格融图（2）",
     tag: "P12",
+    image: asset("image2/originals/p12.png"),
     subtitle: "特殊简笔平涂 2D 人物 + 三渲二场景",
     original:
       "截图例 2 是特殊简笔平涂 2D 人物 + 三渲二场景。原备注：看香蕉融后，角色风格和特征已有明显变化，原场景中的细节缺失较多；GPT 也存在一致性问题，但基础风格特征保持上比香蕉问题更少。",
@@ -370,7 +403,7 @@ function HeroSection({ onStart }: { onStart: () => void }) {
             <span className="block text-rose-100">变成学生会用的方法</span>
           </h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
-            这节课先尽量保留原分享的例子、提示词和备注，再把风格迁移、机位迁移和跨风格融图拆成可练习的方法。
+            这节课直接保留 12 页原截图，再把风格迁移、机位迁移和跨风格融图重构成一套像 PPT 一样可讲、可练、可复盘的互动课件。
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button
@@ -418,7 +451,7 @@ function LearningPath() {
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
         {navItems.map((item, index) => {
           const Icon = item.icon;
-          const copy = ["先知道原分享在兴奋什么。", "保留 P2-P12 的例子、提示词和备注。", "把三种玩法变成可复用步骤。", "用选择器生成结构化提示词。", "用风险清单判断是否可交付。"][index];
+          const copy = ["先知道原分享在兴奋什么。", "保留 P1-P12 原图，并逐页配任务单。", "把三种玩法变成可复用步骤。", "用选择器生成结构化提示词。", "用风险清单判断是否可交付。"][index];
           return (
             <div key={item.id} className="rounded-lg border border-white/8 bg-white/[0.035] p-4">
               <div className="mb-4 flex items-center justify-between">
@@ -498,26 +531,57 @@ function OriginalArchive() {
   const [active, setActive] = useState(0);
   const item = originalArchive[active];
   const teaching = getTeachingMaterial(item);
+  const goPrev = () => setActive((active - 1 + originalArchive.length) % originalArchive.length);
+  const goNext = () => setActive((active + 1) % originalArchive.length);
 
   return (
-    <SectionShell id="archive" eyebrow="Screenshot To Lesson" title="截图教学材料：原内容 + 任务单" icon={FileImage}>
-      <div className="grid gap-4 lg:grid-cols-[0.78fr_1.22fr]">
-        <div className="space-y-2 rounded-lg border border-white/8 bg-white/[0.025] p-2 lg:max-h-[680px] lg:overflow-y-auto">
-          {originalArchive.map((entry, index) => (
-            <button
-              key={entry.title}
-              onClick={() => setActive(index)}
-              className={`w-full rounded-md border p-3 text-left transition ${
-                active === index ? "border-cyan-200/35 bg-cyan-300/12" : "border-white/8 bg-black/16 hover:bg-white/7"
-              }`}
-            >
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-sm font-semibold text-slate-100">{entry.title}</span>
-                <span className="rounded bg-white/8 px-2 py-0.5 text-[10px] font-semibold text-slate-400">{entry.tag}</span>
-              </div>
-              <p className="mt-1 text-xs leading-5 text-slate-500">{entry.subtitle}</p>
-            </button>
-          ))}
+    <SectionShell id="archive" eyebrow="Original Slides" title="原图课件：像 PPT 一样逐页讲" icon={FileImage}>
+      <div className="grid gap-5 lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="rounded-lg border border-white/8 bg-white/[0.035] p-3 lg:sticky lg:top-20 lg:self-start">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100/70">原始截图</p>
+              <h3 className="mt-1 text-sm font-semibold text-slate-100">
+                {String(active + 1).padStart(2, "0")} / {originalArchive.length} · {item.tag}
+              </h3>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={goPrev}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/7 text-slate-200 transition hover:bg-white/12"
+                aria-label="上一页原图"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={goNext}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/7 text-slate-200 transition hover:bg-white/12"
+                aria-label="下一页原图"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-lg border border-white/10 bg-black/28">
+            <img src={item.image} alt={`${item.tag} ${item.title} 原始截图`} className="max-h-[760px] w-full object-contain" />
+          </div>
+
+          <div className="mt-3 grid grid-cols-4 gap-2 sm:grid-cols-6">
+            {originalArchive.map((entry, index) => (
+              <button
+                key={entry.tag}
+                onClick={() => setActive(index)}
+                className={`rounded-md border p-2 text-left transition ${
+                  active === index ? "border-cyan-200/50 bg-cyan-300/10" : "border-white/8 bg-black/18 hover:border-white/20"
+                }`}
+                aria-label={`打开 ${entry.tag}`}
+              >
+                <div className="text-[10px] font-semibold text-cyan-100">{String(index + 1).padStart(2, "0")}</div>
+                <div className="mt-1 text-xs font-semibold text-slate-200">{entry.tag}</div>
+              </button>
+            ))}
+          </div>
         </div>
 
         <motion.article
@@ -558,6 +622,32 @@ function OriginalArchive() {
 }
 
 function getTeachingMaterial(item: (typeof originalArchive)[number]) {
+  if (item.title.includes("课程封面")) {
+    return {
+      objective: "把学生的注意力从“这张图好可爱”转到“这张图为什么适合当 Image 2 迁移课入口”：先建立风格、机位、融图三条学习线。",
+      teacherMoves: [
+        "让学生先说出封面中最吸引人的三个视觉点，再追问这些点分别属于风格、机位还是融图。",
+        "把标题“AI 迁移大法”拆成三个问题：迁移什么、用什么参考、怎么判断成功。",
+        "提醒学生：后面的 11 页不是作品展示，而是一组生成方法实验记录。",
+      ],
+      studentTasks: [
+        "标注封面里的角色风格、镜头角度、材质纹理和文字信息。",
+        "写下本课三条主线：风格参考迁移、机位参考迁移、跨风格融图。",
+        "提出一个判断标准：什么情况算“迁移成功”，什么情况只是“看起来好看”。",
+      ],
+      deliverables: [
+        "一张课程导入卡：写出三个关键词和对应观察点。",
+        "一条学习目标：我学完以后能用参考图控制什么。",
+        "一条风险提醒：好看不等于可控，可控才是本课重点。",
+      ],
+      pitfalls: [
+        "把封面当普通海报欣赏，不进入方法拆解。",
+        "只说画面好看，不说好看的来源。",
+        "忽略标题中的风格、机位、融图其实是三类不同任务。",
+      ],
+    };
+  }
+
   if (item.title.includes("风格参考迁移")) {
     return {
       objective: "让学生从截图中读出“参考图到底提供了什么”：不是复制人物或场景，而是抽取可迁移的画风特征，再把这些特征写成清楚的提示词约束。",
